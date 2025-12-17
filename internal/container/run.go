@@ -4,9 +4,17 @@ import (
 	"os"
 	"os/exec"
 	"syscall"
+	"path/filepath"
 )
 
-const rootfs = "/home/ctrtest/rootfs"
+
+func getProjectRoot() (string, error) {
+	exePath, err := os.Readlink("/proc/self/exe")
+	if err != nil {
+		return "", err
+	}
+	return filepath.Dir(exePath), nil
+}
 
 
 func Run(args []string) error {
@@ -69,6 +77,14 @@ func child(args []string) error {
 
 	syscall.Mount("", "/", "", syscall.MS_PRIVATE|syscall.MS_REC, "")
 
+
+	// Get project root directory
+	projectRoot, err := getProjectRoot()
+	if err != nil {
+		return err
+	}
+
+	rootfs := filepath.Join(projectRoot, "rootfs")
 
 	/// ---- Pivot Root ----
 
