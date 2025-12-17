@@ -5,7 +5,7 @@ MiniDocker (mdocker) is a minimal container runtime implemented in Go to demonst
 
 ## Work Completed So Far
 
-1. Basic CLI Structure
+1. Basic CLI Structure  
 Implemented CLI using cobra in Go with a run command  
 it re executes itself to separate parent and child logic  
 Run as-
