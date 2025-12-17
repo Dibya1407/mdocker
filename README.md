@@ -12,7 +12,7 @@ Run as-
 
     sudo ./mdocker run /bin/sh
 
-2. Linux Namespace Isolation
+2. Linux Namespace Isolation  
     Following have been implemented so far-
       
     PID Namespace
@@ -71,7 +71,6 @@ initially whenever I ran the container, my Arch linux setup would basically stop
 Golang basics,Cobra fundamentals  
 How Containers work,Their purpose  
 Linux Namespaces,cgroups  
-Why PID 1 is special  
 Difference between chroot and pivot_root  
 How container root filesystems work  
 
