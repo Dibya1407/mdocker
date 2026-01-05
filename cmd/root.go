@@ -20,3 +20,10 @@ func Execute() {
 		os.Exit(1)
 	}
 }
+
+func init() {
+    rootCmd.AddCommand(runCmd)
+    rootCmd.AddCommand(freezeCmd)
+    rootCmd.AddCommand(unfreezeCmd)
+    rootCmd.AddCommand(killCmd)
+}
