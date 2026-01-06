@@ -34,24 +34,6 @@ The runtime operates in a two-stage process to ensure proper isolation:
     *   Performs `pivot_root` to switch to the container's root filesystem.
     *   Executes the user's requested command (e.g., `/bin/sh`).
 
-```mermaid
-sequenceDiagram
-    participant User
-    participant Parent as mdocker (Parent)
-    participant Kernel
-    participant Child as mdocker (Child)
-
-    User->>Parent: ./mdocker run --mem 100M /bin/sh
-    Parent->>Parent: Parse flags, Setup Cgroups
-    Parent->>Kernel: Clone with Namespaces (PID, NS, UTS, NET)
-    Kernel->>Child: Start Child Process
-    Parent->>Parent: Wait for Child
-    Child->>Child: Setup Hostname
-    Child->>Child: Mount /proc, /dev
-    Child->>Child: Pivot Root (Switch FS)
-    Child->>Child: Exec /bin/sh
-    Child-->>User: Interactive Shell
-```
 
 ---
 
@@ -171,20 +153,13 @@ Learned that container filesystems must always be built on Linux.
 ---
 
 ## Use of AI Tools in the Project
-Why I Used AI
-
-While building this container runtime, I worked extensively with low-level Linux concepts such as namespaces, cgroups, mount propagation, and process lifecycle management. These topics involve kernel interfaces and system calls that are often difficult to understand through documentation alone.
-
-I used AI tools as a learning and guidance aid, similar to consulting technical blogs, documentation, or experienced developers. The purpose was not to generate the project automatically, but to clarify concepts, understand unexpected system behavior, and speed up the learning process while debugging complex issues.
-
 ### How I Used AI
 
 I used AI assistance in a limited and controlled manner, mainly during the learning and debugging phases of the project. Specifically, I used AI for:
 
 #### Concept Clarification
 - Understanding how Linux namespaces and cgroups work internally  
-- Learning the difference between `chroot` and `pivot_root`  
-- Understanding PID 1 behavior and zombie process reaping  
+- Learning the difference between `chroot` and `pivot_root`   
 - Interpreting mount propagation flags and their effects  
 
 #### Debugging Support
